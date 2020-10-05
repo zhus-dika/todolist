@@ -29,6 +29,7 @@ import ConfigurationService from '@/admin/configuration/configuration.service';
 import TrackerService from './admin/tracker/tracker.service';
 /* tslint:disable */
 
+import TodoitemService from '@/entities/todoitem/todoitem.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -90,6 +91,7 @@ new Vue({
     metricsService: () => new MetricsService(),
     trackerService: () => trackerService,
     alertService: () => alertService,
+    todoitemService: () => new TodoitemService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },
