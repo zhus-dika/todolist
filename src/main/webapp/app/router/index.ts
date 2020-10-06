@@ -7,7 +7,7 @@ Component.registerHooks([
 ]);
 import Router from 'vue-router';
 
-const Home = () => import('@/core/home/home.vue');
+const Todolist = () => import('@/main/todoitem/todoitem.vue');
 const Error = () => import('@/core/error/error.vue');
 import account from '@/router/account.ts';
 import admin from '@/router/admin.ts';
@@ -23,7 +23,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Todolist
     },
     {
       path: '/forbidden',

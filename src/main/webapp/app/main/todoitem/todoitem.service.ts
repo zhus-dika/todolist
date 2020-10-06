@@ -20,10 +20,10 @@ export default class TodoitemService {
     });
   }
 
-  public retrieveByUser(paginationQuery?: any): Promise<any> {
+  public retrieve(paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(baseApiUrl + `/user` + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(baseApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
           resolve(res);
         })
@@ -33,10 +33,10 @@ export default class TodoitemService {
     });
   }
 
-  public retrieve(paginationQuery?: any): Promise<any> {
+  public retrieveByUser(paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(baseApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(baseApiUrl + `/user` + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
           resolve(res);
         })

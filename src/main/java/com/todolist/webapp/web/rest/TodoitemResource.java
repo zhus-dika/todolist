@@ -98,6 +98,14 @@ public class TodoitemResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/todoitems/user")
+    public ResponseEntity<List<Todoitem>> getAllTodoitemsByUser(Pageable pageable) {
+        log.debug("REST request to get a page of Todoitems");
+        Page<Todoitem> page = todoitemService.findAllByCurrentUser(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
     /**
      * {@code GET  /todoitems/:id} : get the "id" todoitem.
      *

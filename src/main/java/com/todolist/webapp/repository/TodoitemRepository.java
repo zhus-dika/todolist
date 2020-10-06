@@ -4,6 +4,9 @@ import com.todolist.webapp.domain.Todoitem;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+
 
 import java.util.List;
 
@@ -15,5 +18,5 @@ import java.util.List;
 public interface TodoitemRepository extends JpaRepository<Todoitem, Long> {
 
     @Query("select todoitem from Todoitem todoitem where todoitem.user.login = ?#{principal.username}")
-    List<Todoitem> findByUserIsCurrentUser();
+    Page<Todoitem> findByUserIsCurrentUser(Pageable pageable);
 }
