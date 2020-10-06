@@ -20,6 +20,13 @@
         <div class="alert alert-warning" v-if="!isFetching && todoitems && todoitems.length === 0">
             <span>No todoitems found</span>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" for="status">Status</label>
+            <select @change.prevent="changeStatus" class="form-control" id="status" name="status" v-model="filter" required>
+                <option :value="0">All</option>
+                <option :value="item" v-for="item in 2" :key="item">{{ (item === 1)?'created':'completed'}}</option>
+            </select>
+        </div>
         <div class="table-responsive" v-if="todoitems && todoitems.length > 0">
             <table class="table table-striped">
                 <thead>

@@ -98,10 +98,28 @@ public class TodoitemResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    @GetMapping("/todoitems/user")
+    @GetMapping("/todoitems/user/all")
     public ResponseEntity<List<Todoitem>> getAllTodoitemsByUser(Pageable pageable) {
         log.debug("REST request to get a page of Todoitems");
         Page<Todoitem> page = todoitemService.findAllByCurrentUser(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/todoitems/user/created")
+    public ResponseEntity<List<Todoitem>> getAllTodoitemsByUserCreated(Pageable pageable) {
+        log.debug("REST request to get a page of Todoitems");
+        String status = "created";
+        Page<Todoitem> page = todoitemService.findAllByCurrentUserAndStatus(pageable, status);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/todoitems/user/completed")
+    public ResponseEntity<List<Todoitem>> getAllTodoitemsByUserCompleted(Pageable pageable) {
+        log.debug("REST request to get a page of Todoitems");
+        String status = "completed";
+        Page<Todoitem> page = todoitemService.findAllByCurrentUserAndStatus(pageable, status);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

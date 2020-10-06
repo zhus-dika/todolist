@@ -57,6 +57,7 @@ export default class TodoitemUpdate extends mixins(JhiDataUtils) {
   }
 
   created(): void {
+    this.initdata();
     this.currentLanguage = this.$store.getters.currentLanguage;
     this.$store.watch(
       () => this.$store.getters.currentLanguage,
@@ -65,7 +66,11 @@ export default class TodoitemUpdate extends mixins(JhiDataUtils) {
       }
     );
   }
-
+  public initdata() {
+    this.todoitem.status = 'created';
+    this.todoitem.user = this.$store.getters.account;
+    this.todoitem.created = new Date();
+  }
   public save(): void {
     this.isSaving = true;
     if (this.todoitem.id) {

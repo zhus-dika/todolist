@@ -2,6 +2,7 @@ import axios from 'axios';
 import Component from 'vue-class-component';
 import { Vue, Inject } from 'vue-property-decorator';
 import AccountService from '@/account/account.service';
+import TodoitemService from '@/main/todoitem/todoitem.service';
 @Component({
   watch: {
     $route() {
@@ -9,14 +10,20 @@ import AccountService from '@/account/account.service';
     },
   },
 })
+
 export default class LoginForm extends Vue {
   @Inject('accountService')
   private accountService: () => AccountService;
   public authenticationError = null;
+
   public login = null;
   public password = null;
   public rememberMe: boolean = null;
 
+
+  public beforeDestroy() {
+    location.reload();
+  }
   public doLogin(): void {
     const data = { username: this.login, password: this.password, rememberMe: this.rememberMe };
     axios

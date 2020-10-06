@@ -30,6 +30,7 @@ public interface TodoitemService {
 
     Page<Todoitem> findAllByCurrentUser(Pageable pageable);
 
+    Page<Todoitem> findAllByCurrentUserAndStatus(Pageable pageable, String status);
 
     /**
      * Get the "id" todoitem.

@@ -16,13 +16,10 @@
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" for="todoitem-status">Status</label>
-                        <input type="text" class="form-control" name="status" id="todoitem-status"
-                            :class="{'valid': !$v.todoitem.status.$invalid, 'invalid': $v.todoitem.status.$invalid }" v-model="$v.todoitem.status.$model"  required/>
-                        <div v-if="$v.todoitem.status.$anyDirty && $v.todoitem.status.$invalid">
-                            <small class="form-text text-danger" v-if="!$v.todoitem.status.required">
-                                This field is required.
-                            </small>
-                        </div>
+                        <select @change.prevent="changeStatus" :disabled="!todoitem.id" class="form-control" id="todoitem-status" name="todoitem-status" required>
+                            <option value="created" :selected="todoitem.status === 'created'">created</option>
+                            <option value="completed" :selected="todoitem.status === 'completed'">completed</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label" for="todoitem-task">Task</label>

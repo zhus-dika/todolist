@@ -22,10 +22,9 @@ export default class Todoitem extends mixins(JhiDataUtils, AlertMixin) {
   public propOrder = 'id';
   public reverse = false;
   public totalItems = 0;
-
-  public todoitems: ITodoitem[] = [];
-
+  public filter = 0;
   public isFetching = false;
+  public todoitems: ITodoitem[] = [];
 
   public mounted(): void {
     this.retrieveAllTodoitems();
@@ -36,13 +35,17 @@ export default class Todoitem extends mixins(JhiDataUtils, AlertMixin) {
     this.retrieveAllTodoitems();
   }
 
+  public changeStatus() {
+    this.retrieveAllTodoitems();
+  }
   public retrieveAllTodoitems(): void {
     this.isFetching = true;
-
+    const status = (this.filter === 0) ? 'all' : ((this.filter === 1) ? 'created' : 'completed');
     const paginationQuery = {
       page: this.page - 1,
       size: this.itemsPerPage,
       sort: this.sort(),
+      filter: status
     };
     this.todoitemService()
       .retrieveByUser(paginationQuery)

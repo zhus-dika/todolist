@@ -19,4 +19,7 @@ public interface TodoitemRepository extends JpaRepository<Todoitem, Long> {
 
     @Query("select todoitem from Todoitem todoitem where todoitem.user.login = ?#{principal.username}")
     Page<Todoitem> findByUserIsCurrentUser(Pageable pageable);
+
+    @Query("select todoitem from Todoitem todoitem where todoitem.user.login = ?#{principal.username} and todoitem.status = ?1")
+    Page<Todoitem> findByUserCurrentUserAndStatus(Pageable pageable, String status);
 }

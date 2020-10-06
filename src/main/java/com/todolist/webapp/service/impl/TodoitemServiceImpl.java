@@ -48,6 +48,13 @@ public class TodoitemServiceImpl implements TodoitemService {
         return todoitemRepository.findByUserIsCurrentUser(pageable);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Todoitem> findAllByCurrentUserAndStatus(Pageable pageable, String status) {
+        log.debug("Request to get all Todoitems");
+        return todoitemRepository.findByUserCurrentUserAndStatus(pageable, status);
+    }
+
 
     @Override
     @Transactional(readOnly = true)

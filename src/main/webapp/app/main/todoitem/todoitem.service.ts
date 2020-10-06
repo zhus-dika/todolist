@@ -36,7 +36,7 @@ export default class TodoitemService {
   public retrieveByUser(paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(baseApiUrl + `/user` + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(baseApiUrl + `/user/${paginationQuery.filter}` + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
           resolve(res);
         })

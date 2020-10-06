@@ -46,7 +46,6 @@ export default class TodoitemUpdate extends mixins(JhiDataUtils) {
   public users: Array<any> = [];
   public isSaving = false;
   public currentLanguage = '';
-
   beforeRouteEnter(to, from, next) {
     next(vm => {
       if (to.params.todoitemId) {
@@ -57,6 +56,7 @@ export default class TodoitemUpdate extends mixins(JhiDataUtils) {
   }
 
   created(): void {
+    this.initdata();
     this.currentLanguage = this.$store.getters.currentLanguage;
     this.$store.watch(
       () => this.$store.getters.currentLanguage,
@@ -66,6 +66,14 @@ export default class TodoitemUpdate extends mixins(JhiDataUtils) {
     );
   }
 
+  public initdata() {
+    this.todoitem.status = 'created';
+    this.todoitem.user = this.$store.getters.account;
+    this.todoitem.created = new Date();
+  }
+  public changeStatus() {
+    this.todoitem.status = (this.todoitem.status === 'created') ? 'completed' : 'created';
+  }
   public save(): void {
     this.isSaving = true;
     if (this.todoitem.id) {
@@ -78,6 +86,9 @@ export default class TodoitemUpdate extends mixins(JhiDataUtils) {
           this.alertService().showAlert(message, 'info');
         });
     } else {
+      this.todoitem.status = 'created';
+      this.todoitem.created = new Date();
+      this.todoitem.user = this.$store.getters.account;
       this.todoitemService()
         .create(this.todoitem)
         .then(param => {
